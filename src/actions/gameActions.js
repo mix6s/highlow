@@ -20,6 +20,12 @@ export function calculateGame() {
 	};
 }
 
+export function changeBet(payload = {bet}) {
+	return {
+		type: types.CHANGE_BET,
+		payload
+	};
+}
 
 export function makeBet() {
 	return {
@@ -27,6 +33,12 @@ export function makeBet() {
 	};
 }
 
+export function pickUp(payload = {prize}) {
+	return {
+		type: types.PICK_UP,
+		payload
+	};
+}
 
 export function win(payload = {prize}) {
 	return {
@@ -86,8 +98,3 @@ export function addAnimation() {
 		type: 'ADD_ANIMATION'
 	};
 }
-
-
-
-
-

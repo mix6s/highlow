@@ -3,9 +3,9 @@ import {card} from './card';
 
 
 const gameState = {
-	screen: 'START_SCREEN', //[START_SCREEN, ATTEMPT_SCREEN, RESULT_SCREEN
+	screen: 'POPUP', //[START_SCREEN, ATTEMPT_SCREEN, RESULT_SCREEN
 	settingsParams: {
-		bet: 0
+		bet: 10
 	},
 	calculatedParams: {
 		result: undefined, // [MORE, LESS, EQUAL]
@@ -44,14 +44,12 @@ export function game(state = gameState, action = {}) {
 				...state,
 				screen: undefined,
 				bank: 0,
-				attemptCount: 0,
-				settingsParams: {bet: action.payload.bet}
+				attemptCount: 0
 			};
 			return newState;
 		case types.CONTINUE_ATTEMPT:
 			newState = {
 				...state,
-				//screen: 'ATTEMPT_SCREEN',
 				attemptCount: state.attemptCount++
 			};
 			return newState;
@@ -96,6 +94,11 @@ export function game(state = gameState, action = {}) {
 				...state,
 				userBalance: state.userBalance - state.settingsParams.bet
 			};
+		case types.CHANGE_BET:
+			return {
+				...state,
+				settingsParams: {bet: action.payload.bet}
+			};
 		case types.DEAL_CARDS:
 			return {
 				...state,
@@ -121,10 +124,16 @@ export function game(state = gameState, action = {}) {
 				...state,
 				bank: state.bank + action.payload.prize
 			};
+		case types.PICK_UP:
+			return {
+				...state,
+				userBalance: state.userBalance + action.payload.prize,
+				bank: state.bank - action.payload.prize
+			};
 		case types.LOOSE:
 			return {
 				...state,
-				bank: 0,
+				bank: 0
 				//screen: 'RESULT_SCREEN'
 			};
 		/*case 'END_GAME':

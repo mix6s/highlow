@@ -23,7 +23,7 @@ export default class Card extends Component {
 	}
 
 	animated = false;
-	cover = require('../components/covers/cover.png');
+	cover = {uri: 'cover'};
 	actionId = 0;
 	rotateY = new Animated.Value(0);
 	translate = new Animated.ValueXY();
@@ -46,7 +46,7 @@ export default class Card extends Component {
 		this.path = Card.getPath(props.card);
 		this.covers = {
 			up: {uri: this.path},
-			down: require('./covers/cover.png')
+			down: {uri: 'cover'}
 		};
 		let defAngleY = props.position == 'left' ? 0 : 180;
 		this.cover = this.resolveCover(defAngleY);
